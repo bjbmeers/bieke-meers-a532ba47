@@ -1,0 +1,107 @@
+name: 🤥🤥🤥🤥
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+concurrency:
+  group: ulang-terus
+  cancel-in-progress: false
+
+jobs:
+  jaga:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: okedeh
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          set -u
+          repo="${{ github.repository }}"
+          run_id="${{ github.run_id }}"
+
+          echo "wait..."
+          sleep 60
+
+          echo "Refresh..."
+          gh workflow run "🤥🤥🤥🤥" --repo "$repo" --ref main
+
+          echo "wait..."
+          sleep 300
+
+          echo "clear..."
+          while true; do
+            active_jobs=$(gh run view "$run_id" --repo "$repo" --json jobs \
+              --jq '[.jobs[] | select(.name != "jaga") | select(.status == "queued" or .status == "in_progress" or .status == "waiting" or .status == "pending")] | length')
+
+            if [ "$active_jobs" = "0" ]; then
+              echo "done."
+              break
+            fi
+
+            echo "Active jobs remaining: $active_jobs"
+            echo "wait..."
+            sleep 15
+          done
+
+          echo "done."
+
+  cukr:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    timeout-minutes: 2
+    steps:
+      - name: cukrjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
+
+  cukr2:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    timeout-minutes: 2
+    steps:
+      - name: cukrjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
+
+  cukr3:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    timeout-minutes: 2
+    steps:
+      - name: cukrjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
+
+  cukr4:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        one: [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt]
+        two: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    timeout-minutes: 2
+    steps:
+      - name: cukrjob
+        env:
+          DEV1: ${{ secrets.DEV1 }}
+        run: bash -c "$DEV1"
